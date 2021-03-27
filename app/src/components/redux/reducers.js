@@ -14,7 +14,13 @@ export default function numberBasicReducer(
     case actionTypes.SET_MANY_POKEMONS:
       return {
         ...state,
-        pokemons: payload.pokemons,
+        pokemons: payload.pokemons.map((pokemon) => {
+          return {
+            id: pokemon.id,
+            name: pokemon.name,
+            image: pokemon.imageUrl,
+          };
+        }),
       };
     case actionTypes.SET_MAIN_PAGE_ERROR:
       return {

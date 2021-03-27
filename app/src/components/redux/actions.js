@@ -3,12 +3,14 @@ import * as actionTypes from "./action-types.js";
 export function startAllPokemons() {
   return async function (dispatch) {
     try {
+      dispatch(removeMPError());
       dispatch(toggleMPLoading());
       const result = await fetch("https://api.pokemontcg.io/v1/cards");
       const finalResult = await result.json();
       dispatch(setAllPokemons(finalResult.cards));
       dispatch(toggleMPLoading());
     } catch (error) {
+      console.log(error);
       dispatch(setMPError());
       dispatch(toggleMPLoading());
     }
