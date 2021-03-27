@@ -1,5 +1,6 @@
 import * as actionTypes from "./action-types.js";
 
+// Main Page
 export function startAllPokemons() {
   return async function (dispatch) {
     try {
@@ -41,5 +42,50 @@ export function removeMPError() {
 export function toggleMPLoading() {
   return {
     type: actionTypes.TOGGLE_MAIN_PAGE_LOADING,
+  };
+}
+
+// Single Pokemon
+export function startPokemon() {
+  return async function (dispatch) {
+    try {
+      dispatch(removeMPError());
+      dispatch(toggleMPLoading());
+      const result = await fetch("https://api.pokemontcg.io/v1/cards");
+      const finalResult = await result.json();
+      dispatch(setAllPokemons(finalResult.cards));
+      dispatch(toggleMPLoading());
+    } catch (error) {
+      console.log(error);
+      dispatch(setMPError());
+      dispatch(toggleMPLoading());
+    }
+  };
+}
+
+export function setPokemon(pokemons) {
+  return {
+    type: actionTypes.SET_SINGLE_POKEMON,
+    payload: {
+      pokemons,
+    },
+  };
+}
+
+export function setSError() {
+  return {
+    type: actionTypes.SET_SINGLE_ERROR,
+  };
+}
+
+export function removeSError() {
+  return {
+    type: actionTypes.REMOVE_SINGLE_ERROR,
+  };
+}
+
+export function toggleSLoading() {
+  return {
+    type: actionTypes.TOGGLE_SINGLE_LOADING,
   };
 }

@@ -1,13 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import numberBasicReducer from "./reducers";
+import mainPageReducer from "./reducerMainPage";
 
 import thunkMiddleware from "redux-thunk";
 
 const store = createStore(
   combineReducers({
-    mainPage: numberBasicReducer,
+    mainPage: mainPageReducer,
   }),
   composeWithDevTools(applyMiddleware(thunkMiddleware))
 );
