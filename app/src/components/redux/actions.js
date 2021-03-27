@@ -46,28 +46,29 @@ export function toggleMPLoading() {
 }
 
 // Single Pokemon
-export function startPokemon() {
+export function startPokemon(pokemonId) {
   return async function (dispatch) {
     try {
-      dispatch(removeMPError());
-      dispatch(toggleMPLoading());
-      const result = await fetch("https://api.pokemontcg.io/v1/cards");
+      dispatch(removeSError());
+      dispatch(toggleSLoading());
+      const result = await fetch(
+        `https://api.pokemontcg.io/v1/cards/${pokemonId}`
+      );
       const finalResult = await result.json();
-      dispatch(setAllPokemons(finalResult.cards));
-      dispatch(toggleMPLoading());
+      dispatch(setPokemon(finalResult.card));
+      dispatch(toggleSLoading());
     } catch (error) {
-      console.log(error);
-      dispatch(setMPError());
-      dispatch(toggleMPLoading());
+      dispatch(setSError());
+      dispatch(toggleSLoading());
     }
   };
 }
 
-export function setPokemon(pokemons) {
+export function setPokemon(pokemon) {
   return {
     type: actionTypes.SET_SINGLE_POKEMON,
     payload: {
-      pokemons,
+      pokemon,
     },
   };
 }

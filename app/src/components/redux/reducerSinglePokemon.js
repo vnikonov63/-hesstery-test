@@ -14,19 +14,19 @@ export default function singlePokemonReducer(
     case actionTypes.SET_SINGLE_POKEMON:
       return {
         ...state,
-        pokemons: payload.pokemon,
+        pokemon: payload.pokemon,
       };
-    case actionTypes.SET_SINGE_ERROR:
+    case actionTypes.SET_SINGLE_ERROR:
       return {
         ...state,
         isError: true,
       };
-    case actionTypes.REMOVE_SINGE_ERROR:
+    case actionTypes.REMOVE_SINGLE_ERROR:
       return {
         ...state,
         isError: false,
       };
-    case actionTypes.TOGGLE_SINGE_LOADING:
+    case actionTypes.TOGGLE_SINGLE_LOADING:
       return {
         ...state,
         isLoading: !state.isLoading,
