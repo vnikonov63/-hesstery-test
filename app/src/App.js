@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import increment from "./components/redux/actions";
+import { startAllPokemons } from "./components/redux/actions";
 
 function App() {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ function App() {
     <>
       <button
         onClick={() => {
-          dispatch(increment());
+          dispatch(startAllPokemons());
         }}
       >
         Click me please

@@ -7,7 +7,7 @@ import thunkMiddleware from "redux-thunk";
 
 const store = createStore(
   combineReducers({
-    numberBasic: numberBasicReducer,
+    mainPage: numberBasicReducer,
   }),
   composeWithDevTools(applyMiddleware(thunkMiddleware))
 );
