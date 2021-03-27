@@ -1,94 +1,26 @@
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import MainPage from "./components/mainPage";
+import PokemonGeneral from "./components/pokemonsGeneral";
 
-import { useEffect, useState } from "react";
+import {
+  Redirect,
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from "react-router-dom";
 
-import { startAllPokemons } from "./components/redux/actions";
-
-import PokemonDetailed from "./components/pokemonDetailed";
-
-const manyPokemonsStyles = {
-  display: "flex",
-  flexWrap: "wrap",
-  margin: "40px",
-  alignItems: "center",
-  justifyContent: "center",
-  border: "2px solid black",
-  width: "60%",
-};
-
-const overallStyles = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flexDirection: "column",
-};
-
-const paginationAreaStyles = {
-  display: "flex",
-  justifyContent: "center",
-};
 function App() {
-  const dispatch = useDispatch();
-  const { pokemons, isError, isLoading } = useSelector(
-    (state) => state.mainPage
-  );
-  const [paginationCount, setPaginationCount] = useState(0);
-  useEffect(() => {
-    dispatch(startAllPokemons());
-  }, []);
   return (
-    <>
-      {isError ? (
-        <h2>An error occured, sorry</h2>
-      ) : isLoading ? (
-        <h3>Loading...</h3>
-      ) : (
-        <div style={overallStyles}>
-          <button
-            style={{
-              margin: "25px",
-            }}
-            className="btn"
-            onClick={() => {
-              dispatch(startAllPokemons());
-            }}
-          >
-            Refresh
-          </button>
-          <div style={paginationAreaStyles}>
-            <button
-              onClick={() => {
-                setPaginationCount((prev) => {
-                  return prev >= 1 ? prev - 1 : prev;
-                });
-              }}
-              className="btn"
-            >
-              prev
-            </button>
-            <div style={manyPokemonsStyles}>
-              {pokemons
-                .filter((pokemon, index) => {
-                  return index % 10 === paginationCount;
-                })
-                .map(({ name, image, id }) => {
-                  return <PokemonDetailed name={name} image={image} id={id} />;
-                })}
-            </div>
-            <button
-              onClick={() => {
-                setPaginationCount((prev) => {
-                  return prev < pokemons.length / 10 ? prev + 1 : prev;
-                });
-              }}
-              className="btn"
-            >
-              next
-            </button>
-          </div>
-        </div>
-      )}
-    </>
+    <Router>
+      <Switch>
+        <Route exac path="/:id">
+          <PokemonGeneral />
+        </Route>
+        <Route exac path="/">
+          <MainPage />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

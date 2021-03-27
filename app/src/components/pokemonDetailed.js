@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 const styles = {
   display: "flex",
   flexDirection: "column",
@@ -12,16 +14,18 @@ const styles = {
   boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
 };
 
-function pokemonDetailed({ name, image }) {
+function pokemonDetailed({ name, image, id }) {
   return (
-    <div style={styles}>
-      <h4>{name}</h4>
-      <img
-        alt={`${name} iamge pokemon`}
-        style={{ width: "190px", height: "265px" }}
-        src={image}
-      />
-    </div>
+    <Link to={`/${id}`}>
+      <div style={styles}>
+        <h4>{name}</h4>
+        <img
+          alt={`${name} iamge pokemon`}
+          style={{ width: "190px", height: "265px" }}
+          src={image}
+        />
+      </div>
+    </Link>
   );
 }
 
